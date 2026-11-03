@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram Session Login</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;max-width:720px;margin:0 auto;padding:24px;line-height:1.6;color:#111}
+  h1{font-size:28px}
+  .warn{background:#fff3cd;border:1px solid #e6c87a;padding:12px 16px;border-radius:8px}
+  .bm{display:inline-block;background:#0095f6;color:#fff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:600}
+  code{background:#f2f2f2;padding:2px 6px;border-radius:4px}
+  pre{background:#111;color:#eee;padding:16px;border-radius:8px;overflow:auto;font-size:13px}
+  details{margin:12px 0}
+  footer{margin-top:32px;color:#666;font-size:14px}
+</style>
+</head>
+<body>
+<h1>Instagram Session Login</h1>
+<p>Log in to your Instagram account with your <code>sessionid</code> only. No username, no password.</p>
+<div class="warn"><strong>Warning:</strong> Your sessionid is a full credential for your account, like a password. Never share it with anyone, and never paste anyone else's sessionid here. It never leaves your browser: this page has no server and sends nothing anywhere. Instagram may still ask for extra verification, or restrict logins it sees as unusual.</div>
+<h2>Step 1: Save the bookmarklet</h2>
+<p>Drag this button to your browser's bookmarks bar:</p>
+<p><a class="bm" href="javascript:(function(){var s=prompt('Paste your Instagram sessionid:');if(!s){return;}s=s.trim();document.cookie='sessionid='+s+';domain=.instagram.com;path=/;max-age=31536000;Secure';location.reload();})();">Instagram Session Login</a></p>
+<h2>Step 2: Use it</h2>
+<ol>
+<li>Open <a href="https://www.instagram.com/">instagram.com</a> in the same browser.</li>
+<li>Click the <strong>Instagram Session Login</strong> bookmark.</li>
+<li>Paste your sessionid when asked. The page reloads and you are logged in.</li>
+</ol>
+<p>If the session is expired or invalid, Instagram will show its normal login page instead. In that case, log in normally and copy a fresh sessionid.</p>
+<h2>How to find your sessionid</h2>
+<details><summary>Show steps</summary>
+<p>While logged in to Instagram in your desktop browser: press F12 to open DevTools, go to <strong>Application &rarr; Cookies &rarr; https://www.instagram.com</strong>, and copy the value of <code>sessionid</code>.</p>
+</details>
+<h2>How it works</h2>
+<details><summary>Show code and explanation</summary>
+<p>The bookmarklet runs on instagram.com itself, sets the <code>sessionid</code> cookie for <code>.instagram.com</code>, and reloads the page. A normal website cannot set Instagram's cookies, which is why this is a bookmarklet and not a login form. Nothing is sent to any server and nothing is stored.</p>
+<pre>javascript:(function(){
+  var s = prompt('Paste your Instagram sessionid:');
+  if (!s) { return; }
+  s = s.trim();
+  document.cookie = 'sessionid=' + s + ';domain=.instagram.com;path=/;max-age=31536000;Secure';
+  location.reload();
+})();</pre>
+</details>
+<h2>Manual method (no bookmarklet)</h2>
+<details><summary>Show steps</summary>
+<p>On instagram.com, open DevTools (F12) &rarr; Application &rarr; Cookies, add a cookie named <code>sessionid</code> with your value, then reload the page.</p>
+</details>
+<footer>Free and open source (MIT). No data is collected. Built for your own account only.</footer>
+</body>
+</html>
